@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'com..dsimplegui.Main'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    //test dependencies
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    baseName = rootProject.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+    manifest {
+        attributes 'Main-Class': mainClassName,
+                   'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
+    }
+}
