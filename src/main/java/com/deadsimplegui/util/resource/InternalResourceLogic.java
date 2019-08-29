@@ -28,7 +28,6 @@ public class InternalResourceLogic implements ResourceLogic {
           .map(param -> param.split("="))
           .forEach(param -> {
             try {
-              System.out.println(param[0]);
               params.put(
                   URLDecoder.decode(param[0], StandardCharsets.UTF_8.toString()),
                   URLDecoder.decode(param[1], StandardCharsets.UTF_8.toString())
